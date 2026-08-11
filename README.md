@@ -4,6 +4,8 @@ I made this website as a personal project to get back again into coding properly
 as a return gift he dumped me on mine<33
 thanks for giving me the best bday gift so far, appreciate it
 
+if your relationship is strong enough, use this, customize it and lift the curse from this amazing website ;)
+
 very cute happy birthday wishes website, with a puzzle and funny bday messages.
 made with typescript and tailwind + css
 had dark mode feature too 
