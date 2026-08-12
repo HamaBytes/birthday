@@ -1,10 +1,9 @@
 #happy-birthday-website
 
-I made this website as a personal project to get back again into coding properly and wish my then partner Happy Birthday<3
-as a return gift he dumped me on mine<33
-thanks for giving me the best bday gift so far, appreciate it
+I made this website as a personal project to get back again into coding properly and wish my then partner Happy Birthday <3
+as a return gift I got dumped on mine <33
 
-if your relationship is strong enough, use this, customize it and lift the curse from this amazing website ;)
+please dedicate this to people who "genuinely" care for you and you'd wanna make their special day even more special :))
 
 very cute happy birthday wishes website, with a puzzle and funny bday messages.
 made with typescript and tailwind + css
