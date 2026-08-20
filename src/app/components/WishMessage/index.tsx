@@ -2,7 +2,14 @@ import { useState, useEffect } from 'react';
 import celebrateGif from '../../../images/celebrate.gif';
 import { AnimatedText } from './AnimatedText';
 import { Heart, Sparkles, MoonStar } from 'lucide-react';
-import { WISH_MESSAGES, WISH_PAGE_TEXT } from '../../data/messages';
+import {
+  WISH_MESSAGES,
+  WISH_PAGE_TEXT,
+  FORGIVE_BUTTON,
+  NO_BUTTON,
+  FORGIVEN_MESSAGE,
+  NO_RESPONSES,
+} from '../../data/messages';
 import { playHBD, stopHBD } from '../../utils/audioUtils';
 
 //---- BACKGROUND DECORATION ICONS WITH POSITIONS AND STYLING ----//
@@ -22,11 +29,37 @@ const decorations = [
   { Icon: Sparkles, top: 'bottom-6', left: 'left-6', color: 'text-rose-300/25', size: 'size-5', delay: '0.6s' },
   { Icon: MoonStar, top: 'top-12', left: 'right-50', color: 'text-rose-300/30', size: 'size-6', delay: '1.1s' },
   { Icon: Heart, top: 'bottom-8', left: 'right-50', color: 'text-pink-200/30', size: 'size-6', delay: '1.4s' },
+  // Extra hearts for more romantic feel
+  { Icon: Heart, top: 'top-14', left: 'left-1/3', color: 'text-rose-300/40', size: 'size-6', delay: '0.9s' },
+  { Icon: Heart, top: 'top-6', left: 'left-3/4', color: 'text-pink-400/30', size: 'size-5', delay: '1.1s' },
+  { Icon: Heart, top: 'bottom-24', left: 'left-40', color: 'text-rose-200/30', size: 'size-7', delay: '0.4s' },
+  { Icon: Heart, top: 'top-28', left: 'right-10', color: 'text-pink-300/30', size: 'size-6', delay: '1.6s' },
+  { Icon: Heart, top: 'bottom-4', left: 'left-12', color: 'text-rose-300/25', size: 'size-5', delay: '0.7s' },
 ];
+
+// Additional emoji decorations (roses) to emphasize love theme
+const emojiDecorations = [
+  { emoji: '🌹', top: 'top-10', left: 'left-20', delay: '0.2s', size: 'text-3xl' },
+  { emoji: '🌹', top: 'top-24', left: 'right-24', delay: '0.8s', size: 'text-2xl' },
+  { emoji: '🌹', top: 'bottom-28', left: 'left-28', delay: '1.2s', size: 'text-3xl' },
+  { emoji: '🌹', top: 'top-1/3', left: 'left-40', delay: '1.6s', size: 'text-2xl' },
+  { emoji: '🌹', top: 'bottom-10', left: 'right-10', delay: '0.4s', size: 'text-3xl' },
+];
+
+const fallingRoses = Array.from({ length: 18 }, (_, index) => ({
+  id: index,
+  left: `${4 + ((index * 17) % 92)}%`,
+  delay: `${-(index * 0.7)}s`,
+  duration: `${10 + (index % 5) * 1.4}s`,
+  size: `${1.1 + (index % 3) * 0.25}rem`,
+}));
 
 // THIS FUNC SHOWS THE WISH MESSAGES WITH STYLING AND ANIMATIONS
 export function WishMessage() {
   const [messageIndex, setMessageIndex] = useState(0);
+  const [showQuestion, setShowQuestion] = useState(false);
+  const [showForgiven, setShowForgiven] = useState(false);
+  const [noMsgIndex, setNoMsgIndex] = useState(0);
 
   useEffect(() => {
     playHBD();
@@ -35,12 +68,41 @@ export function WishMessage() {
 
   const handleComplete = () => {
     setTimeout(() => {
-      setMessageIndex((prev) => (prev + 1) % WISH_MESSAGES.length);
+      setMessageIndex((prev) => {
+        if (prev === WISH_MESSAGES.length - 1) {
+          setShowQuestion(true);
+          return prev;
+        }
+        return prev + 1;
+      });
     }, 1000);
   };
 
+  // A gentle response that respects her choice and lets her read the next note.
+  const handleNotYet = () => {
+    setNoMsgIndex((prev) => (prev + 1) % NO_RESPONSES.length);
+  };
+
   return (
-    <div className="size-full flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 min-h-screen">
+    <div className="wish-page size-full flex items-center justify-center relative overflow-hidden min-h-screen">
+      <div className="wish-page__glow wish-page__glow--one" />
+      <div className="wish-page__glow wish-page__glow--two" />
+      <div className="wish-page__roses" aria-hidden="true">
+        {fallingRoses.map((rose) => (
+          <span
+            key={rose.id}
+            className="wish-page__falling-rose"
+            style={{
+              left: rose.left,
+              animationDelay: rose.delay,
+              animationDuration: rose.duration,
+              fontSize: rose.size,
+            }}
+          >
+            🌹
+          </span>
+        ))}
+      </div>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {decorations.map((dec, idx) => {
           const { Icon, color, size, delay, ...positions } = dec;
@@ -52,42 +114,83 @@ export function WishMessage() {
             />
           );
         })}
+        {emojiDecorations.map((ed, idx) => (
+          <span
+            key={`emoji-${idx}`}
+            className={`absolute ${ed.top} ${ed.left} ${ed.size} animate-pulse`}
+            style={{ animationDelay: ed.delay }}
+          >
+            {ed.emoji}
+          </span>
+        ))}
       </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto px-6 sm:px-8">
-        <div className="bg-white/40 backdrop-blur-sm rounded-3xl shadow-2xl p-8 sm:p-12 border border-pink-200/50">
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <Heart className="text-pink-500 size-8 fill-pink-400" />
-            <Sparkles className="text-rose-400 size-6" />
-            <Heart className="text-pink-500 size-8 fill-pink-400" />
-          </div>
+      <div className="wish-page__content relative z-10 max-w-3xl mx-auto px-5 sm:px-8">
+        {!showQuestion ? (
+          <>
+            <p className="wish-page__eyebrow">A birthday wish, made with love</p>
+            <div className="wish-page__card bg-white/40 backdrop-blur-sm rounded-3xl shadow-2xl p-8 sm:p-12 border border-pink-200/50">
+              <div className="wish-page__rose-garland" aria-hidden="true">🌹 · ✦ · 🌹 · ✦ · 🌹</div>
+              <div className="flex items-center justify-center gap-3 mb-8">
+                <Heart className="text-pink-500 size-8 fill-pink-400" />
+                <Sparkles className="text-rose-400 size-6" />
+                <Heart className="text-pink-500 size-8 fill-pink-400" />
+              </div>
 
-          <div className="min-h-[120px] flex items-center justify-center">
-            <p className="text-2xl sm:text-3xl text-center text-pink-900/90 italic leading-relaxed">
-              <AnimatedText
-                key={messageIndex}
-                text={WISH_MESSAGES[messageIndex]}
-                speed={60}
-                onComplete={handleComplete}
-              />
-            </p>
-          </div>
+              <div className="min-h-[120px] flex items-center justify-center">
+                <p className="text-2xl sm:text-3xl text-center text-pink-900/90 italic leading-relaxed">
+                  <AnimatedText
+                    key={messageIndex}
+                    text={WISH_MESSAGES[messageIndex]}
+                    speed={60}
+                    onComplete={handleComplete}
+                  />
+                </p>
+              </div>
 
-          <div className="mt-8 flex justify-center gap-2">
-            {WISH_MESSAGES.map((_, index) => (
-              <div
-                key={index}
-                className={`size-2 rounded-full transition-all duration-300 ${
-                  index === messageIndex ? 'bg-pink-500 w-8' : 'bg-pink-300/50'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
+              <div className="mt-8 flex justify-center gap-2">
+                {WISH_MESSAGES.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`size-2 rounded-full transition-all duration-300 ${
+                      index === messageIndex ? 'bg-pink-500 w-8' : 'bg-pink-300/50'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div className="text-center mt-6">
-          <p className="text-pink-700/60 italic text-sm">{WISH_PAGE_TEXT}</p>
-        </div>
+            <div className="text-center mt-6">
+              <p className="text-pink-700/60 italic text-sm">A message from my heart, one line at a time</p>
+            </div>
+          </>
+        ) : (
+          <div className="wish-page__question-screen">
+            <div className="wish-page__question-roses" aria-hidden="true">🌹 &nbsp; ✦ &nbsp; 🌹</div>
+            <Heart className="wish-page__question-heart text-pink-500 fill-pink-400" />
+            <p className="wish-page__eyebrow">For you, Tasnim</p>
+            <h1 className="wish-page__question-title">Wishing you the happiest birthday, 9 Sept</h1>
+            <div className="wish-page__question-line" />
+            <p className="wish-page__choice-title">A little question from my heart</p>
+            {showForgiven ? (
+              <div className="wish-page__reply bg-rose-50/60 p-4 rounded-lg shadow-md text-center text-pink-700">
+                {FORGIVEN_MESSAGE}
+              </div>
+            ) : (
+              <>
+                <div className="flex items-center gap-4 flex-wrap justify-center mt-5">
+                  <button className="wish-page__button wish-page__button--primary" onClick={() => setShowForgiven(true)}>
+                    {FORGIVE_BUTTON}
+                  </button>
+                  <button className="wish-page__button wish-page__button--secondary" onClick={handleNotYet}>
+                    {NO_BUTTON}
+                  </button>
+                </div>
+                <div className="mt-4 text-sm text-rose-600 italic">{NO_RESPONSES[noMsgIndex]}</div>
+              </>
+            )}
+          </div>
+        )}
       </div>
       <div className="absolute bottom-4 right-4 z-30 pointer-events-none">
         <img
@@ -99,5 +202,3 @@ export function WishMessage() {
     </div>
   );
 }
-
-

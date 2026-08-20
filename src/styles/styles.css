@@ -273,6 +273,52 @@ body {
   position: relative;
 }
 
+.success-heart-button {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform .25s ease, filter .25s ease;
+}
+
+.success-heart-button:hover { transform: scale(1.08) rotate(-3deg); filter: brightness(1.06); }
+.success-heart-button:focus-visible { outline: 3px solid #ec4899; outline-offset: .5rem; }
+
+.success-click-prompt {
+  border: 0;
+  background: rgba(255, 255, 255, .65);
+  color: #be185d;
+  font: inherit;
+  font-size: clamp(.8rem, 2vw, 1rem);
+  font-weight: 700;
+  padding: .65rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 .4rem 1rem rgba(190, 24, 93, .14);
+  animation: clickPromptBounce 1.8s ease-in-out infinite;
+}
+
+.success-click-prompt__sparkle { display: inline-block; margin: 0 .3rem; color: #ec4899; animation: sparkleSpin 2.5s linear infinite; }
+
+.puzzle-tutorial {
+  max-width: 46rem;
+  padding: .75rem 1rem;
+  background: rgba(255, 255, 255, .42);
+  border: 1px solid rgba(236, 72, 153, .18);
+  border-radius: 1rem;
+  color: #a9154c;
+  box-shadow: 0 .6rem 1.5rem rgba(190, 24, 93, .08);
+  text-align: center;
+  animation: tutorialIn .6s ease-out both;
+}
+
+.puzzle-tutorial__title { display: block; font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .35rem; }
+.puzzle-tutorial__steps { display: flex; align-items: center; justify-content: center; gap: .45rem; flex-wrap: wrap; font-size: clamp(.75rem, 2vw, .9rem); }
+.puzzle-tutorial__steps b { display: inline-grid; place-items: center; width: 1.2rem; height: 1.2rem; margin-right: .2rem; background: #ec4899; color: white; border-radius: 50%; font-size: .7rem; }
+.puzzle-tutorial__arrow { color: #ec4899; font-weight: 800; animation: tutorialArrow 1.2s ease-in-out infinite; }
+
 .complete-heart::before {
   content: '';
   position: absolute;
@@ -307,6 +353,53 @@ body {
   font-weight: 600;
   text-shadow: 0 0.125rem 0.5rem rgba(201, 24, 74, 0.3);
   margin: 0;
+}
+
+/* ===== BIRTHDAY WISH PAGE ===== */
+.wish-page {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255,255,255,.9), transparent 28%),
+    radial-gradient(circle at 85% 80%, rgba(255, 151, 191, .55), transparent 30%),
+    linear-gradient(135deg, #fff0f6 0%, #ffe0ed 48%, #fbc5dc 100%);
+}
+
+.wish-page__glow, .wish-page__roses { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.wish-page__glow { width: 38vw; height: 38vw; max-width: 34rem; max-height: 34rem; border-radius: 999px; filter: blur(20px); opacity: .55; animation: wishGlow 7s ease-in-out infinite; }
+.wish-page__glow--one { left: -12%; top: -15%; background: #ff9fc4; }
+.wish-page__glow--two { right: -12%; bottom: -16%; background: #f9b5d0; animation-delay: -3.5s; }
+
+.wish-page__falling-rose { position: absolute; top: -12%; opacity: .7; filter: drop-shadow(0 0.2rem 0.2rem rgba(190, 24, 93, .16)); animation-name: roseFall; animation-timing-function: linear; animation-iteration-count: infinite; }
+.wish-page__content { animation: wishContentIn .85s cubic-bezier(.2,.8,.2,1) both; }
+.wish-page__eyebrow { color: #b51c56; font-size: .76rem; letter-spacing: .14em; text-align: center; text-transform: uppercase; font-weight: 700; margin: 0 0 .75rem; text-shadow: 0 1px 0 rgba(255,255,255,.8); }
+.wish-page__card { position: relative; overflow: hidden; box-shadow: 0 1.25rem 3.75rem rgba(168, 29, 83, .22); }
+.wish-page__card::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.7); border-radius: inherit; pointer-events: none; }
+.wish-page__rose-garland { color: #c2185b; letter-spacing: .28em; text-align: center; font-size: clamp(.8rem, 2vw, 1rem); margin: -0.55rem 0 1.5rem; animation: garlandGlow 2.8s ease-in-out infinite; }
+.wish-page__button { border: 0; border-radius: 999px; padding: .7rem 1.25rem; font: inherit; font-weight: 700; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, filter .2s ease; }
+.wish-page__button:hover { transform: translateY(-2px) scale(1.02); }
+.wish-page__button:focus-visible { outline: 3px solid rgba(190, 24, 93, .4); outline-offset: 3px; }
+.wish-page__button--primary { color: #fff; background: linear-gradient(135deg, #ec4899, #be185d); box-shadow: 0 .55rem 1.2rem rgba(190, 24, 93, .28); }
+.wish-page__button--secondary { color: #9d174d; background: rgba(255, 228, 239, .88); box-shadow: 0 .4rem .9rem rgba(190, 24, 93, .12); }
+.wish-page__reply { animation: replyIn .45s ease-out both; }
+.wish-page__choice-title { color: #a9154c; font-style: italic; font-weight: 700; margin: 0; animation: garlandGlow 2.8s ease-in-out infinite; }
+.wish-page__question-screen { text-align: center; padding: clamp(2rem, 7vw, 4.5rem) clamp(1.5rem, 6vw, 4rem); border-radius: 2rem; background: rgba(255, 255, 255, .52); border: 1px solid rgba(255,255,255,.82); box-shadow: 0 1.25rem 3.75rem rgba(168, 29, 83, .22); animation: wishContentIn .8s cubic-bezier(.2,.8,.2,1) both; }
+.wish-page__question-roses { color: #c2185b; font-size: 1.25rem; letter-spacing: .15em; margin-bottom: 1rem; animation: garlandGlow 2.8s ease-in-out infinite; }
+.wish-page__question-heart { width: 3.25rem; height: 3.25rem; margin: 0 auto 1rem; filter: drop-shadow(0 .5rem .8rem rgba(190,24,93,.22)); animation: heartPulseLarge 1.5s ease-in-out infinite; }
+.wish-page__question-title { color: #9d174d; font-size: clamp(1.65rem, 5vw, 2.75rem); line-height: 1.2; font-weight: 700; margin: .4rem auto 1.25rem; max-width: 38rem; text-wrap: balance; }
+.wish-page__question-line { height: 2px; width: min(12rem, 55%); margin: 0 auto 1.25rem; background: linear-gradient(90deg, transparent, #ec4899, transparent); }
+
+@keyframes roseFall { from { transform: translate3d(0, -10vh, 0) rotate(0deg); } to { transform: translate3d(3rem, 120vh, 0) rotate(300deg); } }
+@keyframes wishGlow { 0%, 100% { transform: scale(.85) translate(0, 0); } 50% { transform: scale(1.18) translate(5%, 8%); } }
+@keyframes wishContentIn { from { opacity: 0; transform: translateY(1.25rem) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes garlandGlow { 0%,100% { transform: scale(1); opacity: .78; } 50% { transform: scale(1.04); opacity: 1; } }
+@keyframes replyIn { from { opacity: 0; transform: translateY(.5rem); } to { opacity: 1; transform: translateY(0); } }
+@keyframes clickPromptBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.3rem); } }
+@keyframes sparkleSpin { to { transform: rotate(360deg); } }
+@keyframes tutorialIn { from { opacity: 0; transform: translateY(-.5rem); } to { opacity: 1; transform: translateY(0); } }
+@keyframes tutorialArrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(.18rem); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
 }
 
 /* ===== ANIMATIONS ===== */

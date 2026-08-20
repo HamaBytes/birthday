@@ -64,6 +64,17 @@ export function PuzzleGame({ onHeartClick }) {
         </p>
       </div>
 
+      <div className="puzzle-tutorial" aria-label="How to play">
+        <span className="puzzle-tutorial__title">How to open the surprise</span>
+        <div className="puzzle-tutorial__steps">
+          <span><b>1</b> Pick up a heart half</span>
+          <span className="puzzle-tutorial__arrow">→</span>
+          <span><b>2</b> Drop it in the middle</span>
+          <span className="puzzle-tutorial__arrow">→</span>
+          <span><b>3</b> Mend the heart 💗</span>
+        </div>
+      </div>
+
       <div className="grid grid-cols-[1fr_1.1fr_1fr] gap-2 sm:gap-6 lg:gap-10 items-center justify-items-center w-full max-w-[1400px]">
         {Object.keys(data).map((section) => (
           <PuzzleColumn

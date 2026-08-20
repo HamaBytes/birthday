@@ -7,6 +7,8 @@ export function BirthdayIntro({ onStart }) {
   return (
     <div className="intro-container">
       <div className="intro-content">
+        <div className="intro-rose-corner intro-rose-corner--left" aria-hidden="true">🌹</div>
+        <div className="intro-rose-corner intro-rose-corner--right" aria-hidden="true">🌹</div>
         <div className="intro-decoration intro-decoration-top">
           <Heart className="intro-icon intro-heart-1" />
           <Sparkles className="intro-icon intro-sparkle-1" />
@@ -37,7 +39,7 @@ export function BirthdayIntro({ onStart }) {
         </div>
 
         <button className="intro-button" onClick={onStart}>
-          {INTRO_MESSAGES.button}
+          <span>🌹</span> {INTRO_MESSAGES.button} <span>🌹</span>
         </button>
       </div>
     </div>
