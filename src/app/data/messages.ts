@@ -20,7 +20,7 @@ export const PUZZLE_MESSAGES = {
 export const SUCCESS_MESSAGES = {
   completed: "✨ Happy Birthday, Tasnim — this is from my heart ✨",
   instruction: 'You deserve the happiest, loveliest day.',
-  cta: "I love you very much. I'm sorry for what happened between us, and I hope that one day we can start again. I've sent you an email on 20/08/2026.",
+  cta: 'I made this with love. There is one final letter from my heart waiting for you.',
 };
 
 export const HEART_CLICK_PROMPT = 'Click the heart to open your birthday message';
@@ -33,23 +33,15 @@ export const WISH_MESSAGES = [
   'I hope today is full of joy, laughter, beautiful surprises, and everything you love.',
   'You are truly special, and I want you to feel celebrated and cherished today.',
   'I love you very much — more than words can say.',
-  "I'm sorry for what happened between us. I know my apology cannot undo it, but it comes sincerely from my heart.",
-  'If you ever feel ready, I would be grateful for a chance to start over and do better.',
+  'There is one final letter I want to share with you, honestly and from my heart.',
 ];
-// Deprecated: do not export a component from data file. Keep data exports only.
 
-/* ---- WISH MESSAGE PAGE TEXT ---- */
-export const WISH_PAGE_TEXT = 'For you, Tasnim — wishing you the happiest birthday, 9 Sept';
-
-/* ---- BUTTONS & INTERACTIONS ---- */
-export const FORGIVE_BUTTON = 'I forgive you';
-export const NO_BUTTON = 'Not yet';
-
-export const FORGIVEN_MESSAGE = 'Thank you, Tasnim. I am deeply grateful, and I will cherish this chance.';
-
-export const NO_RESPONSES = [
-  'I understand. Take all the time you need.',
-  'Your feelings matter to me.',
-  'I hope your birthday is still as beautiful as you are.',
-  'Sending you all my love and the biggest birthday wishes. 🌹',
+/* ---- FINAL GOODBYE LETTER ---- */
+export const GOODBYE_LETTER = [
+  'Happy Birthday, Tasnim.',
+  'I want to take full responsibility for what happened between us. I am sorry for the pain I caused you.',
+  'I am sorry that I broke the promise I gave you, for the hopes I raised, and for every lie I told you.',
+  'You did not deserve to carry the weight of my mistakes. There is no excuse for the ways I hurt you.',
+  'I do not expect forgiveness or an answer. I only want to apologise honestly and wish you peace, happiness, and a beautiful future.',
+  'Goodbye, Tasnim. I will always hope life is kind to you.',
 ];

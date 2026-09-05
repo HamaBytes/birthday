@@ -3,12 +3,8 @@ import celebrateGif from '../../../images/celebrate.gif';
 import { AnimatedText } from './AnimatedText';
 import { Heart, Sparkles, MoonStar } from 'lucide-react';
 import {
+  GOODBYE_LETTER,
   WISH_MESSAGES,
-  WISH_PAGE_TEXT,
-  FORGIVE_BUTTON,
-  NO_BUTTON,
-  FORGIVEN_MESSAGE,
-  NO_RESPONSES,
 } from '../../data/messages';
 import { playHBD, stopHBD } from '../../utils/audioUtils';
 
@@ -58,8 +54,6 @@ const fallingRoses = Array.from({ length: 18 }, (_, index) => ({
 export function WishMessage() {
   const [messageIndex, setMessageIndex] = useState(0);
   const [showQuestion, setShowQuestion] = useState(false);
-  const [showForgiven, setShowForgiven] = useState(false);
-  const [noMsgIndex, setNoMsgIndex] = useState(0);
 
   useEffect(() => {
     playHBD();
@@ -76,11 +70,6 @@ export function WishMessage() {
         return prev + 1;
       });
     }, 1000);
-  };
-
-  // A gentle response that respects her choice and lets her read the next note.
-  const handleNotYet = () => {
-    setNoMsgIndex((prev) => (prev + 1) % NO_RESPONSES.length);
   };
 
   return (
@@ -169,26 +158,13 @@ export function WishMessage() {
             <div className="wish-page__question-roses" aria-hidden="true">🌹 &nbsp; ✦ &nbsp; 🌹</div>
             <Heart className="wish-page__question-heart text-pink-500 fill-pink-400" />
             <p className="wish-page__eyebrow">For you, Tasnim</p>
-            <h1 className="wish-page__question-title">Wishing you the happiest birthday, 9 Sept</h1>
+            <h1 className="wish-page__question-title">A final letter from my heart</h1>
             <div className="wish-page__question-line" />
-            <p className="wish-page__choice-title">A little question from my heart</p>
-            {showForgiven ? (
-              <div className="wish-page__reply bg-rose-50/60 p-4 rounded-lg shadow-md text-center text-pink-700">
-                {FORGIVEN_MESSAGE}
-              </div>
-            ) : (
-              <>
-                <div className="flex items-center gap-4 flex-wrap justify-center mt-5">
-                  <button className="wish-page__button wish-page__button--primary" onClick={() => setShowForgiven(true)}>
-                    {FORGIVE_BUTTON}
-                  </button>
-                  <button className="wish-page__button wish-page__button--secondary" onClick={handleNotYet}>
-                    {NO_BUTTON}
-                  </button>
-                </div>
-                <div className="mt-4 text-sm text-rose-600 italic">{NO_RESPONSES[noMsgIndex]}</div>
-              </>
-            )}
+            <div className="wish-page__goodbye-letter">
+              {GOODBYE_LETTER.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
           </div>
         )}
       </div>
