@@ -2,12 +2,18 @@ import heartImg from "../../../images/heart.png";
 import { HEART_CLICK_PROMPT, SUCCESS_MESSAGES } from "../../data/messages";
 
 export function SuccessScreen({ onHeartClick }) {
+  const roses = [
+    ['top-6 left-6', 'text-3xl', '0s'], ['top-6 right-6', 'text-2xl', '0.6s'],
+    ['bottom-10 left-10', 'text-3xl', '1.1s'], ['bottom-8 right-12', 'text-3xl', '1.6s'],
+    ['top-1/3 left-14', 'text-2xl', '0.3s'], ['top-1/4 right-16', 'text-2xl', '1.3s'],
+  ];
+
   return (
-    <div className="success-container">
+    <div className="success-container success-container--celebration">
       <div className="absolute inset-0 pointer-events-none">
-        <span className="absolute top-6 left-6 text-3xl animate-pulse">🌹</span>
-        <span className="absolute top-6 right-6 text-2xl animate-pulse" style={{ animationDelay: '0.6s' }}>🌹</span>
-        <span className="absolute bottom-10 left-10 text-3xl animate-pulse" style={{ animationDelay: '1.1s' }}>🌹</span>
+        {roses.map(([position, size, delay], index) => (
+          <span className={`success-rose absolute ${position} ${size}`} style={{ animationDelay: delay }} key={index}>🌹</span>
+        ))}
       </div>
       <div className="message-container">
        <div className="message-text">{SUCCESS_MESSAGES.completed}</div>

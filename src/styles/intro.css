@@ -1,15 +1,79 @@
----- BDAY INTRO PAGE ----
+/* ---- BIRTHDAY LOCK ---- */
+.birthday-lock {
+  min-height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.85), transparent 28%),
+    radial-gradient(circle at 85% 85%, rgba(255, 194, 220, 0.7), transparent 30%),
+    linear-gradient(135deg, #fff4f9 0%, #ffdce9 100%);
+  color: #8e1743;
+}
+
+.birthday-lock__card {
+  width: min(100%, 39rem);
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3.5rem);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 1rem 3rem rgba(169, 27, 88, 0.16);
+  backdrop-filter: blur(12px);
+}
+
+.birthday-lock__sparkles,
+.birthday-lock__eyebrow {
+  color: #ca3570;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.birthday-lock__sparkles { font-size: 1.1rem; }
+.birthday-lock__icon { display: block; margin: 1rem 0 0.75rem; font-size: 2.75rem; }
+.birthday-lock h1 { margin: 0; font-size: clamp(2rem, 7vw, 3.5rem); color: #bf174f; }
+.birthday-lock__eyebrow { margin: 0.4rem 0; font-size: 0.72rem; font-weight: 700; }
+.birthday-lock__message { max-width: 27rem; margin: 1.2rem auto 1.5rem; line-height: 1.6; font-size: clamp(0.95rem, 2.5vw, 1.1rem); }
+
+.birthday-lock__countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.4rem, 2vw, 0.85rem);
+}
+
+.birthday-lock__unit {
+  padding: 0.75rem 0.25rem;
+  border-radius: 1rem;
+  background: rgba(255, 222, 235, 0.78);
+}
+
+.birthday-lock__unit span { display: block; font-size: clamp(1.3rem, 5vw, 2rem); font-weight: 700; color: #bd174e; }
+.birthday-lock__unit small { color: #9d496c; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.birthday-lock__note { margin: 1.4rem 0 0; color: #9d496c; font-style: italic; font-size: 0.9rem; }
+
+/* ---- BDAY INTRO PAGE ---- */
 .intro-container {
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100%;
-  background: linear-gradient(135deg, #ffeef8 0%, #ffe4f1 100%);
+  background:
+    radial-gradient(circle at 10% 12%, rgba(255,255,255,.9), transparent 22%),
+    radial-gradient(circle at 88% 83%, rgba(255, 154, 195, .4), transparent 28%),
+    linear-gradient(135deg, #fff5f9 0%, #ffe1ed 52%, #ffd0e2 100%);
   padding: clamp(1rem, 3vw, 2.5rem);
   overflow-x: hidden;
 }
 
+.intro-rose-garden { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.intro-floating-rose { position: absolute; opacity: .55; filter: drop-shadow(0 .25rem .28rem rgba(158, 22, 75, .16)); animation: introRoseDrift 5.5s ease-in-out infinite; }
+
 .intro-content {
+  isolation: isolate;
+  overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -18,14 +82,17 @@
   gap: clamp(1.5rem, 4vw, 2.5rem);
   max-width: 600px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.58);
   backdrop-filter: blur(10px);
   padding: clamp(1.5rem, 5vw, 3rem);
   border-radius: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(201, 24, 74, 0.1);
+  box-shadow: 0 1.2rem 3.5rem rgba(166, 24, 75, 0.16), inset 0 1px 0 rgba(255,255,255,.9);
   animation: introFadeIn 0.6s ease-in-out;
 }
+
+.intro-card-shine { position: absolute; z-index: -1; inset: -60%; background: linear-gradient(112deg, transparent 45%, rgba(255,255,255,.7) 50%, transparent 55%); transform: translateX(-60%) rotate(8deg); animation: introCardShine 8s ease-in-out infinite; }
+.intro-kicker { margin: 0 0 .45rem; color: #b41e59; font-size: clamp(.65rem, 1.6vw, .78rem); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
 
 .intro-rose-corner {
   position: absolute;
@@ -47,7 +114,7 @@
   font-weight: 700;
   color: #c9184a;
   margin-bottom: clamp(1rem, 2vw, 1.5rem);
-  text-shadow: 0 2px 4px rgba(201, 24, 74, 0.15);
+  text-shadow: 0 2px 4px rgba(201, 24, 74, 0.15), 0 .65rem 1.2rem rgba(201, 24, 74, 0.1);
   letter-spacing: -0.5px;
 }
 
@@ -83,15 +150,15 @@
   font-weight: 600;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  box-shadow: 0 .65rem 1.4rem rgba(255, 20, 147, 0.3), inset 0 1px 0 rgba(255,255,255,.45);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   white-space: nowrap;
   letter-spacing: 0.5px;
 }
 
 .intro-button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
   box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
 }
 
@@ -99,6 +166,8 @@
   transform: translateY(0);
   box-shadow: 0 2px 10px rgba(255, 20, 147, 0.3);
 }
+
+.intro-button:focus-visible { outline: 3px solid rgba(190, 24, 93, .4); outline-offset: 4px; }
 
 /* ---- DECORATIVE ICONS ---- */
 .intro-decoration {
@@ -180,4 +249,15 @@
 @keyframes introRoseSway {
   0%, 100% { transform: rotate(-8deg) translateY(0); }
   50% { transform: rotate(8deg) translateY(-0.4rem); }
+}
+
+@keyframes introRoseDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-7deg); }
+  50% { transform: translate3d(.5rem, -.7rem, 0) rotate(8deg); }
+}
+
+@keyframes introCardShine {
+  0%, 70%, 100% { transform: translateX(-65%) rotate(8deg); opacity: 0; }
+  80% { opacity: .9; }
+  93% { transform: translateX(65%) rotate(8deg); opacity: 0; }
 }

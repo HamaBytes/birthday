@@ -42,7 +42,7 @@ const emojiDecorations = [
   { emoji: '🌹', top: 'bottom-10', left: 'right-10', delay: '0.4s', size: 'text-3xl' },
 ];
 
-const fallingRoses = Array.from({ length: 18 }, (_, index) => ({
+const fallingRoses = Array.from({ length: 30 }, (_, index) => ({
   id: index,
   left: `${4 + ((index * 17) % 92)}%`,
   delay: `${-(index * 0.7)}s`,

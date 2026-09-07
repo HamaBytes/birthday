@@ -4,6 +4,13 @@ import { SuccessScreen } from "../SuccessScreen";
 import { PUZZLE_MESSAGES } from "../../data/messages";
 import { canDrop, getPairedItems, playGlassSlideSound } from "../../utils/puzzleLogic";
 
+const puzzleRoses = Array.from({ length: 14 }, (_, index) => ({
+  id: index,
+  left: `${2 + ((index * 23) % 96)}%`,
+  delay: `${-(index * 0.85)}s`,
+  size: `${0.9 + (index % 3) * 0.22}rem`,
+}));
+
 const initialData = {
   leftCol: [{ sliceId: 1, side: "left" }],
   InProgress: [],
@@ -50,8 +57,12 @@ export function PuzzleGame({ onHeartClick }) {
   }
 
   return (
-    <div className="flex flex-col gap-3 sm:gap-6 lg:gap-10 px-3 sm:px-6 lg:px-10 py-3 sm:py-6 lg:py-10 bg-gradient-to-br from-[#ffeef8] to-[#ffe4f1] min-h-full items-center justify-center overflow-x-hidden">
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#c9184a] text-center mb-4 sm:mb-6 animate-pulse" style={{ textShadow: '0 2px 4px rgba(201, 24, 74, 0.15)', letterSpacing: '-0.5px' }}>
+    <div className="puzzle-page flex flex-col gap-3 sm:gap-6 lg:gap-10 px-3 sm:px-6 lg:px-10 py-3 sm:py-6 lg:py-10 min-h-full items-center justify-center overflow-x-hidden">
+      <div className="puzzle-page__rose-rain" aria-hidden="true">
+        {puzzleRoses.map((rose) => <span key={rose.id} style={{ left: rose.left, animationDelay: rose.delay, fontSize: rose.size }}>🌹</span>)}
+      </div>
+      <p className="puzzle-page__kicker">One small game, one big surprise</p>
+      <h1 className="puzzle-page__title text-3xl sm:text-4xl lg:text-5xl font-bold text-[#c9184a] text-center mb-4 sm:mb-6" style={{ textShadow: '0 2px 4px rgba(201, 24, 74, 0.15)', letterSpacing: '-0.5px' }}>
         {PUZZLE_MESSAGES.title}
       </h1>
 
@@ -75,7 +86,7 @@ export function PuzzleGame({ onHeartClick }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-[1fr_1.1fr_1fr] gap-2 sm:gap-6 lg:gap-10 items-center justify-items-center w-full max-w-[1400px]">
+      <div className="puzzle-page__board grid grid-cols-[1fr_1.1fr_1fr] gap-2 sm:gap-6 lg:gap-10 items-center justify-items-center w-full max-w-[1400px]">
         {Object.keys(data).map((section) => (
           <PuzzleColumn
             key={section}

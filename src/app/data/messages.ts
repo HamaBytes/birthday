@@ -42,6 +42,6 @@ export const GOODBYE_LETTER = [
   'I want to take full responsibility for what happened between us. I am sorry for the pain I caused you.',
   'I am sorry that I broke the promise I gave you, for the hopes I raised, and for every lie I told you.',
   'You did not deserve to carry the weight of my mistakes. There is no excuse for the ways I hurt you.',
-  'I do not expect forgiveness or an answer. I only want to apologise honestly and wish you peace, happiness, and a beautiful future.',
+  'I wish we could fix all of that and celebrate your birthday together.',
   'Goodbye, Tasnim. I will always hope life is kind to you.',
 ];
