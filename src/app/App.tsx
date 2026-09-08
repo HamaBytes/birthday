@@ -7,8 +7,7 @@ import '../styles/intro.css';
 
 // Tunisia observes UTC+1. This is 9 September 2026, 00:00 in Tunisia.
 const UNLOCK_TIME = new Date('2026-09-08T23:00:00.000Z').getTime();
-// Set to false when you want the scheduled lock screen to return.
-const OPEN_NOW = true;
+const OPEN_NOW = false;
 
 function formatRemaining(milliseconds: number) {
   const totalSeconds = Math.max(0, Math.ceil(milliseconds / 1000));

@@ -71,6 +71,12 @@
 .intro-rose-garden { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
 .intro-floating-rose { position: absolute; opacity: .55; filter: drop-shadow(0 .25rem .28rem rgba(158, 22, 75, .16)); animation: introRoseDrift 5.5s ease-in-out infinite; }
 
+.birthday-party { position: fixed; inset: 0; z-index: 20; overflow: hidden; pointer-events: none; }
+.birthday-party__confetti { position: absolute; top: -1.25rem; width: .55rem; height: .85rem; border-radius: .12rem; box-shadow: 0 .15rem .3rem rgba(132, 20, 67, .16); animation-name: birthdayConfettiFall; animation-timing-function: cubic-bezier(.22,.61,.36,1); animation-fill-mode: forwards; }
+.birthday-party__burst { position: absolute; top: 18%; color: #fbbf24; font-size: clamp(3rem, 10vw, 7rem); text-shadow: 0 0 1.5rem rgba(255,255,255,.95), 0 0 2.5rem rgba(251, 191, 36, .7); animation: birthdayBurst 1.2s ease-out both; }
+.birthday-party__burst--left { left: 8%; }
+.birthday-party__burst--right { right: 8%; animation-delay: .16s; }
+
 .intro-content {
   isolation: isolate;
   overflow: hidden;
@@ -260,4 +266,16 @@
   0%, 70%, 100% { transform: translateX(-65%) rotate(8deg); opacity: 0; }
   80% { opacity: .9; }
   93% { transform: translateX(65%) rotate(8deg); opacity: 0; }
+}
+
+@keyframes birthdayConfettiFall {
+  0% { opacity: 0; translate: 0 -2rem; rotate: 0deg; }
+  10% { opacity: 1; }
+  100% { opacity: 0; translate: 3rem 110vh; rotate: 540deg; }
+}
+
+@keyframes birthdayBurst {
+  0% { opacity: 0; transform: scale(.15) rotate(0deg); }
+  45% { opacity: 1; transform: scale(1.2) rotate(25deg); }
+  100% { opacity: 0; transform: scale(.75) rotate(60deg); }
 }

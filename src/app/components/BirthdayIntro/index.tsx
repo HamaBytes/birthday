@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Heart, Sparkles } from 'lucide-react';
 import { INTRO_MESSAGES } from '../../data/messages';
 
@@ -10,9 +11,44 @@ const roseGarden = Array.from({ length: 18 }, (_, index) => ({
   size: `${1 + (index % 3) * 0.28}rem`,
 }));
 
+const confetti = Array.from({ length: 72 }, (_, index) => ({
+  id: index,
+  left: `${(index * 37) % 100}%`,
+  delay: `${(index % 12) * 0.07}s`,
+  duration: `${2.8 + (index % 5) * 0.28}s`,
+  color: ['#ec4899', '#f9a8d4', '#fbbf24', '#fb7185', '#c084fc'][index % 5],
+  rotation: `${(index * 47) % 360}deg`,
+}));
+
 export function BirthdayIntro({ onStart }) {
+  const [showParty, setShowParty] = useState(true);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setShowParty(false), 6_000);
+    return () => window.clearTimeout(timeout);
+  }, []);
+
   return (
     <div className="intro-container">
+      {showParty && (
+        <div className="birthday-party" aria-hidden="true">
+          <div className="birthday-party__burst birthday-party__burst--left">✦</div>
+          <div className="birthday-party__burst birthday-party__burst--right">✦</div>
+          {confetti.map((piece) => (
+            <span
+              className="birthday-party__confetti"
+              key={piece.id}
+              style={{
+                left: piece.left,
+                animationDelay: piece.delay,
+                animationDuration: piece.duration,
+                backgroundColor: piece.color,
+                transform: `rotate(${piece.rotation})`,
+              }}
+            />
+          ))}
+        </div>
+      )}
       <div className="intro-rose-garden" aria-hidden="true">
         {roseGarden.map((rose) => (
           <span
